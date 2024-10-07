@@ -5,11 +5,15 @@ const ObjectId = require('mongodb').ObjectId;
 
 
 //-------------------------------------
-//  GET DB COLLECTION
+//  GET ALL WZ META COLLECTION
 //-------------------------------------
 const getAll = async (req, res, next) => {
     try{
-      const result = await mongodb.getDatabase().db().collection('users').find();
+      const result = await mongodb
+        .getDatabase()
+        .db()
+        .collection('wzmeta')
+        .find();
       result.toArray().then((lists) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(lists);
@@ -20,17 +24,17 @@ const getAll = async (req, res, next) => {
   };
   
   //------------------------------------
-  // GET SINGLE USER
+  // GET SINGLE WZ META
   //------------------------------------
   
   const getSingle = async (req, res, next) => {
     try{
-      const userId = new ObjectId(req.params.id);
+      const wzmetaId = new ObjectId(req.params.id);
       const result = await mongodb
         .getDatabase()
         .db()
-        .collection('users')
-        .find({ _id: userId });
+        .collection('wzmeta')
+        .find({ _id: wzmetaId });
       result.toArray().then((lists) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(lists[0]);
@@ -41,27 +45,31 @@ const getAll = async (req, res, next) => {
   };
 
   //------------------------------------
-  // CREATE USER
+  // CREATE WZ META
   //------------------------------------
   
-  const createUser = async (req, res, next) => {
+  const createMeta = async (req, res, next) => {
     try{
-      const user = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        favoriteColor: req.body.favoriteColor,
-        birthday: req.body.birthday
+      const wzmetaBody = {
+        name: req.body.name,
+        muzzle: req.body.muzzle,
+        barrel: req.body.barrel,
+        optic: req.body.optic,
+        stock: req.body.stock,
+        magazine: req.body.magazine,
+        underbarrel: req.body.underbarrel,
+        ammunition: req.body.ammunition,
+        rearGrip: req.body.rearGrip
       };
       const result = await mongodb
         .getDatabase()
         .db()
-        .collection('users')
-        .insertOne(user);
+        .collection('wzmeta')
+        .insertOne(wzmetaBody);
         if (result.acknowledged) {
           res.status(204).send();
         } else {
-          res.status(500).json({ message: 'Failed to create user' });
+          res.status(500).json(result.error || 'Error while deleting');
         }
     }catch(err) {
       res.status(500).json(err);
@@ -69,30 +77,33 @@ const getAll = async (req, res, next) => {
   };
 
   //------------------------------------
-  // UPDATE USER
+  // UPDATE WZ META
   //------------------------------------
 
-  const updateUser = async (req, res) => {
+  const updateMeta = async (req, res) => {
     //swagger.tags=['User']
-   const userId = new ObjectId(req.params.id);
-  
-   const user = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    favoriteColor: req.body.favoriteColor,
-    birthday: req.body.birthday 
+   const wzmetaId = new ObjectId(req.params.id);
+   const wzmetaBody = {
+    name: req.body.name,
+    muzzle: req.body.muzzle,
+    barrel: req.body.barrel,
+    optic: req.body.optic,
+    stock: req.body.stock,
+    magazine: req.body.magazine,
+    underbarrel: req.body.underbarrel,
+    ammunition: req.body.ammunition,
+    rearGrip: req.body.rearGrip
    };
   
    const result = await mongodb
     .getDatabase()
     .db()
-    .collection('users')
-    .replaceOne({_id: userId}, user); 
+    .collection('wzmeta')
+    .replaceOne({_id: wzmetaId}, wzmetaBody); 
    if(result.modifiedCount > 0) {
     res.status(204).send();
    } else {
-    res.status(500).json(result.error || "Error while Updating User")
+    res.status(500).json(result.error || "Error while updating meta")
    }
   }
 
@@ -101,25 +112,18 @@ const getAll = async (req, res, next) => {
   // DELETE USER
   //------------------------------------
   
-  const deleteUser = async (req, res, next) => {
+  const deleteMeta = async (req, res, next) => {
     
-      const userId = new ObjectId(req.params.id);
-      const user = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        favoriteColor: req.body.favoriteColor,
-        birthday: req.body.birthday
-      };
+      const wzmetaId = new ObjectId(req.params.id);
       const result = await mongodb
         .getDatabase()
         .db()
-        .collection('users')
-        .deleteOne({ _id: userId}, user);
+        .collection('wzmeta')
+        .deleteOne({ _id: wzmetaId});
         if (result.modifiedcount > 0) {
           res.status(204).send();
         } else {
-          res.status(500).json({ message: 'Failed to delete user' });
+          res.status(500).json(result.error || 'Error while deleting');
         }
     
   };
@@ -128,7 +132,7 @@ const getAll = async (req, res, next) => {
   module.exports = {
     getAll,
     getSingle,
-    createUser,
-    updateUser,
-    deleteUser
+    createMeta,
+    updateMeta,
+    deleteMeta
   }
