@@ -5,7 +5,7 @@
     "description": "User APIs",
     "version": "1.0.0"
   },
-  "host": "creestian.onrender.com",
+  "host": "cse341-project2-1nzc.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
@@ -21,7 +21,7 @@
         }
       }
     },
-    "/users/": {
+    "/wzmeta/": {
       "get": {
         "description": "",
         "produces": [
@@ -45,19 +45,31 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "name": {
                   "example": "any"
                 },
-                "lastName": {
+                "muzzle": {
                   "example": "any"
                 },
-                "email": {
+                "barrel": {
                   "example": "any"
                 },
-                "favoriteColor": {
+                "optic": {
                   "example": "any"
                 },
-                "birthday": {
+                "stock": {
+                  "example": "any"
+                },
+                "magazine": {
+                  "example": "any"
+                },
+                "underbarrel": {
+                  "example": "any"
+                },
+                "ammunition": {
+                  "example": "any"
+                },
+                "rearGrip": {
                   "example": "any"
                 }
               }
@@ -74,7 +86,7 @@
         }
       }
     },
-    "/users/{id}": {
+    "/wzmeta/{id}": {
       "get": {
         "description": "",
         "produces": [
@@ -112,19 +124,31 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "name": {
                   "example": "any"
                 },
-                "lastName": {
+                "muzzle": {
                   "example": "any"
                 },
-                "email": {
+                "barrel": {
                   "example": "any"
                 },
-                "favoriteColor": {
+                "optic": {
                   "example": "any"
                 },
-                "birthday": {
+                "stock": {
+                  "example": "any"
+                },
+                "magazine": {
+                  "example": "any"
+                },
+                "underbarrel": {
+                  "example": "any"
+                },
+                "ammunition": {
+                  "example": "any"
+                },
+                "rearGrip": {
                   "example": "any"
                 }
               }
@@ -155,19 +179,31 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "name": {
                   "example": "any"
                 },
-                "lastName": {
+                "muzzle": {
                   "example": "any"
                 },
-                "email": {
+                "barrel": {
                   "example": "any"
                 },
-                "favoriteColor": {
+                "optic": {
                   "example": "any"
                 },
-                "birthday": {
+                "stock": {
+                  "example": "any"
+                },
+                "magazine": {
+                  "example": "any"
+                },
+                "underbarrel": {
+                  "example": "any"
+                },
+                "ammunition": {
+                  "example": "any"
+                },
+                "rearGrip": {
                   "example": "any"
                 }
               }
