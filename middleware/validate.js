@@ -2,7 +2,6 @@ const validator = require('../helpers/validate');
 
 const saveContact = (req, res, next) => {
   const validationRule = {
-    wzmeta_id: 'integer',
     name: 'required|string',
     muzzle: 'string',
     barrel: 'string',

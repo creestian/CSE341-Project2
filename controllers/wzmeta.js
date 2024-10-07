@@ -1,4 +1,3 @@
-const { createSecureServer } = require('http2');
 const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
@@ -7,7 +6,7 @@ const ObjectId = require('mongodb').ObjectId;
 //-------------------------------------
 //  GET ALL WZ META COLLECTION
 //-------------------------------------
-const getAll = async (req, res, next) => {
+const getAll = async (req, res) => {
     try{
       const result = await mongodb
         .getDatabase()
@@ -27,7 +26,7 @@ const getAll = async (req, res, next) => {
   // GET SINGLE WZ META
   //------------------------------------
   
-  const getSingle = async (req, res, next) => {
+  const getSingle = async (req, res) => {
     try{
       const wzmetaId = new ObjectId(req.params.id);
       const result = await mongodb
@@ -48,7 +47,7 @@ const getAll = async (req, res, next) => {
   // CREATE WZ META
   //------------------------------------
   
-  const createMeta = async (req, res, next) => {
+  const createMeta = async (req, res) => {
     try{
       const wzmetaBody = {
         name: req.body.name,
@@ -68,7 +67,7 @@ const getAll = async (req, res, next) => {
         .insertOne(wzmetaBody);
         console.log(result);
         if (result.acknowledged) {
-          res.status(204).send();
+          res.status(201).send();
         } else {
           res.status(500).json(result.error || 'Error while deleting');
         }
@@ -115,7 +114,7 @@ const getAll = async (req, res, next) => {
   //------------------------------------
   
   const deleteMeta = async(req, res) => {
-    
+    try{
       const wzmetaId = new ObjectId(req.params.id);
       const result = await mongodb
         .getDatabase()
@@ -123,12 +122,14 @@ const getAll = async (req, res, next) => {
         .collection('wzmeta')
         .deleteOne({ _id: wzmetaId});
         console.log(result);
-        if (result.modifiedcount > 0) {
+        if (result.deletedCount > 0) {
           res.status(204).send();
         } else {
           res.status(500).json(result.error || 'Error while deleting');
         }
-    
+      }catch(err) {
+        throw err;
+    }
   };
 
 
