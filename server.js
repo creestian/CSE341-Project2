@@ -24,15 +24,18 @@ process.on('uncaughtException', (err,origin)=> {
     console.log(process.stderr.fd, `Cought exception: ${err}\n` + `Exception origin: ${origin}`);
   } )
 
-  mongodb.conectDB ((error)=>{
-    if (error) {
-        console.log(error);
+mongodb.initDb ((error)=> {
+    if(error) {
+        console.log(error)
     } else {
-        app.listen(port, ()=> {
-            console.log(`Server & Database is RUNNING on Port: ${port} `)
+        app.listen(port, () => {
+            console.log(`Database and Node is Running on Port ${port}`);
+           
         })
+
     }
-  })
+})
+
 
 
 
