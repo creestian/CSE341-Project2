@@ -66,6 +66,7 @@ const getAll = async (req, res, next) => {
         .db()
         .collection('wzmeta')
         .insertOne(wzmetaBody);
+        console.log(result);
         if (result.acknowledged) {
           res.status(204).send();
         } else {
@@ -99,7 +100,8 @@ const getAll = async (req, res, next) => {
     .getDatabase()
     .db()
     .collection('wzmeta')
-    .replaceOne({_id: wzmetaId}, wzmetaBody); 
+    .replaceOne({_id: wzmetaId}, wzmetaBody);
+    console.log(result);
    if(result.modifiedCount > 0) {
     res.status(204).send();
    } else {
@@ -112,7 +114,7 @@ const getAll = async (req, res, next) => {
   // DELETE USER
   //------------------------------------
   
-  const deleteMeta = async (req, res, next) => {
+  const deleteMeta = async(req, res) => {
     
       const wzmetaId = new ObjectId(req.params.id);
       const result = await mongodb
@@ -120,6 +122,7 @@ const getAll = async (req, res, next) => {
         .db()
         .collection('wzmeta')
         .deleteOne({ _id: wzmetaId});
+        console.log(result);
         if (result.modifiedcount > 0) {
           res.status(204).send();
         } else {
