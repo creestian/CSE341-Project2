@@ -1,0 +1,41 @@
+### ---Test the SERVER 
+GET http://localhost:8080
+
+### --Test ALL USERS
+GET http://localhost:8080/users
+
+### --Test SINGLE USER
+GET http://localhost:8080/users/66f9edd66ce49c34a9b87886
+
+### ---Render ALL USERS---
+GET https://creestian.onrender.com/users
+
+### ---Render SINGLE USER
+GET https://creestian.onrender.com/users/66f9edd66ce49c34a9b87886
+
+### ---Create a contact---
+POST http://localhost:8080/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName":"Diego",
+  "lastName":"Gomez",
+  "email":"diego@gmail.com",
+  "favoriteColor":"rosita",
+  "birthday":"05/03/1978"
+}
+
+### Update a contact
+PUT http://localhost:8080/users/66f9edd66ce49c34a9b87886 HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "Diego",
+  "lastName": "Gomez",
+  "email": "diego@gmail.com",
+  "favoriteColor": "rosa",
+  "birthday": "05/03/1978"
+}
+
+### Delete a contact
+DELETE http://localhost:8080/users/66f9ec17861a65118a55af3f HTTP/1.1
