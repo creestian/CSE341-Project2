@@ -29,9 +29,7 @@ app
             'Origin, X-Requested-With, Content-Type, Accept, Z-key, Authorization'
         );
         // res.setHeader('Content-Type', 'application/json');
-        res.setHeader(
-            'Accesss-Control-Allow-Methods', 
-            'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+        res.setHeader('Accesss-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
         next();
     })
     .use(cors({methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']}))
@@ -74,7 +72,7 @@ app.get('/github/callback',
 
 //CHECK FOR ANY ERROR 
     process.on('uncaughtException', (err,origin)=> {
-        console.log(process.stderr.fd, `Cought exception: ${err}\n` + `Exception origin: ${origin}`);
+        console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
     } )
 
 mongodb.initDb ((error)=> {
